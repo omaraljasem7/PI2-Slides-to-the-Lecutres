@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <title>Übung 3 (Express)</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+<p dir="ltr" style="text-align: left;"><strong>Aufgabe 1</strong><br>
+</p><p>Heute bauen wir das WebService-Beispiel aus der Vorlesung nach. Bitte
+ wenden Sie die Schritte der Reihe nach an und melden Sie sich, sollten 
+Fehler auftreten.</p>
+<ol dir="ltr">
+    <li>Starten Sie WebStorms</li>
+    <li>Legen Sie ein neues Projekt des Typs "Express" an.<br>Wählen Sie unter 'Location' einen geeigneten Ort und Namen für Ihr Projekt.<br>Wählen Sie 'View Engine'=none und 'Stylesheet Engine'=Plain CSS.<br>'Node Interpreter' und 'express-generator' sollten gefüllt sein.<br>Nach 'Create' sollten Sie ein Projekt haben, welches schon einen Ordner 'public' und andere hat.</li>
+    <li>Erzeugen Sie eine 'tsconfig.json' Datei - wissen Sie noch, wie das geht?<br>Verifizieren Sie bitte, dass in der Datei "esModuleInterop" auf "true" gesetzt ist.<br></li>
+    <li>Setzen Sie für TypeScript "Recompile on Changes" - wissen Sie noch wo?</li>
+    <li>Installieren Sie die Node-Typen für TypeScript. Dazu öffnen Sie ein Terminal (z.B. in WebStorm ganz unten) und geben ein:<br><code>npm install -D @types/node<br></code><code>npm install -D @types/express<br></code>
+        Damit werden dem TypeScript-Compiler die Typen aller in Node und Express vordefinierten Funktionen <br>bekannt gemacht. Ohne diese lässt sich die folgende TypeScript-Datei nicht kompilieren.</li>
+    <li>Installieren Sie Express:<br><code>npm install express</code></li>
+    <li>Kopieren Sie drei Dateien adder.html, adderFetch.ts und adder.ts (siehe Moodle-Kurs) und legen Sie sie im Projekt wie folgt ab:<br>adder.html -&gt; 'public';<br>adderFetch.ts -&gt; 'public/javascripts'<br>adder.ts -&gt; in den Hauptordner.</li>
+    <li>Starten Sie 'adder.js'<br>Sie sollten eine Meldung 'Server running on port 3000' sehen.</li>
+    <li>Öffnen Sie im Browser die folgende URL:<br>http://localhost:3000/adder.html</li>
+</ol><h4>Aufgabe 2</h4><p>Die Übungsleiter werden Ihnen eine kleine Beispielanwendung zeigen. Diskutieren Sie in kleinen Gruppen, welche Bestandteile notwendig sind und bauen Sie die Anwendung nach. Die Gruppe, die die beste und vollständigste Lösung hat, bekommt einen kleinen Preis.<br></p><p><br></p><p></p>
+</body>
+</html>

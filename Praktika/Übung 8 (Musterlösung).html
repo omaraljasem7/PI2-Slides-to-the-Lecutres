@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<head>
+    <title>Übung 8 (Musterlösung)</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+<p dir="ltr" style="text-align: left;"></p><div><pre>package org.example;<br><br>import org.mindrot.jbcrypt.BCrypt;<br>import java.util.Scanner;<br><br>public class Main {<br>    public static void main(String[] args) {<br>        String salt;<br>        String hashed;<br>        String password="";<br>        int strength=0;<br>        Scanner scanner = new Scanner(System.in);<br><br>        if (args.length==2) {<br>                password = args[0];<br>                strength = Integer.parseInt(args[1]);<br>            }<br>        else {<br>            System.err.println("Please provide password and strength");<br>            System.exit(0);<br>        }<br><br>        salt = BCrypt.gensalt(strength);<br>        hashed = BCrypt.hashpw(password, salt);<br>        System.out.println("Salt= " + salt + ", hash= " + hashed );<br><br>        while (true) {<br>            System.out.print("Enter Password &gt; ");<br>            String input = scanner.nextLine();<br>            if (BCrypt.checkpw(input, hashed)) {<br>                System.out.println("Password Matched!");<br>                break;<br>            } else {<br>                System.out.println("Password Incorrect!");<br>            }<br>        }<br>    }<br>}</pre></div><br><p></p>
+</body>
+</html>

@@ -1,0 +1,28 @@
+use pi2;
+
+create table dozent (
+    id int primary key,
+    Name varchar(20) not null
+    );
+
+
+create table kurs (
+    ModulNr varchar(7) not null,
+    ModulName text,
+    CrP int default 6,
+     PRIMARY KEY (ModulNr),
+    Dozent_id int NOT NULL,
+    FOREIGN KEY (Dozent_id) REFERENCES dozent(id)
+    );
+
+
+insert into dozent values (11, "Herzberg");
+insert into dozent values (12, "Meyer");
+insert into dozent values (13, "Bienhaus");
+
+insert into kurs values ("INF1003", "Programmieren 1", 6, 11);
+insert into kurs values ("INF1005", "Praktische Informatik 1", 6, 12);
+insert into kurs values ("II1001", "Technische Informatik 1", 6, 13);
+insert into kurs values ("TI5005", "Verteilte Algorithmen", 6, 12);
+
+

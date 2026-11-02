@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Übung 6 Musterlösung</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+<p dir="ltr" style="text-align: left;"></p>
+<p dir="ltr">Stellen Sie sicher, dass Sie Tabellen "Dozent" und "Kurs" mit dem Skript angelegt und gefüllt haben.<br>Unterhalb dieser Übung finden Sie noch ein zweites Skript, das sie bitte auch einlesen.</p>
+<h5 dir="ltr">1) SELECT</h5>
+<p dir="ltr"><strong>a) <br></strong>Sie wollen die Namen der Studierenden, die Namen der von ihnen absolvierten Module und ihre Note ausgeben lassen. Warum führt <code>select name, modulname, rating from students, kurs, ratings; </code> nicht zum richtigen Ergebnis?</p>
+<p dir="ltr"><em>Antwort: Ohne die Bedingungen, die die Primär- - Sekundärschlüsselbeziehungen abbilden, werden die Tabellen lediglich "ausmultipliziert".</em><br></p>
+<h5>b) <br></h5>
+<p>Geben Sie die korrekte Abfrage an.</p>
+<p dir="ltr">
+    <em>Antwort: <br>
+        <code>select name, modulname, rating from students s, kurs k, ratings r where r.sid=s.matrikelnr and k.modulnr=r.kid;</code></em><br>
+</p>
+<h5 dir="ltr">c)<br></h5>
+<p> Selektieren Sie alle Kurse, bei denen Mueller mehr als 75 Punkte erreicht hat.</p>
+<p dir="ltr"><em>Antwort: <br><code>select modulname from kurs k, ratings r, students s where s.name="Mueller" and r.sid=s.matrikelnr and r.kid=k.modulnr and r.rating&gt;75; </code> </em><br></p>
+<h5>d) </h5>
+<p dir="ltr">Geben Sie ddie Anzahl der Studierenden aus.<br><em>Antwort: <br>
+        <code>select count(*) from students;</code></em><br></p>
+<h5>e) </h5><p dir="ltr">Was ist an folgender Abfrage überflüssig?
+    <br> <code>select s.name, r.rating, k.modulnr from students s, ratings r, kurs k where s.matrikelnr=r.sid and r.kid=k.modulnr;<br></code>
+</p>
+<p><em>Antwort: <br>
+    Die Modulnummer kann hier auch direkt aus der Ratings-Tabelle gelesen werden, dann entfällt auch der Abgleich mit der Kurs-Tabelle:
+</em></p>
+<p><em><code>select s.name, r.rating, r.kid from students s, ratings r where s.matrikelnr=r.sid;</code></em></p><em>
+Hinweis: Die Verknüpfung mehrerer Tabellen kostet immer Zeit und Speicherplatz. Versuchen Sie, solche überflüssigen Verbünde zu vermeiden!
+</em><p dir="ltr">
+</p>
+<p dir="ltr">f) Ermitteln Sie die Namen der Studierenden, die genau zwei Kurse absolviert haben. Benutzen Sie dabei nicht COUNT.<br><em>Antwort:<br></em>
+    <em><code>select distinct s.name from students s, ratings r1, ratings r2 where (r1.sid=s.matrikelnr and r2.sid=matrikelnr and r1.kid&lt;&gt;r2.kid);</code></em> <br>
+</p><br><h5 dir="ltr">2) Unterabfragen</h5>
+<p>Unterabfragen (subqueries) kann man auf verschiedene Arten verwenden:</p>
+<p>a) In Where-Klauseln:<br>Benutzen Sie den Operator IN, um die Namen
+    aller Studierenden zu ermitteln, deren Matrikelnummer in der Tabelle
+    ratings vorkommt.</p>
+<p><em>Antwort:<br></em>
+    <em><code>select s.name from students s where s.matrikelnr in (select sid from ratings );</code></em><br>
+</p>
+<p>b) In Select's:<br>Beispiel:<code> SELECT column1, (SELECT column2 FROM other_table WHERE condition) AS subquery_result</code><code> FROM table_name;</code></p>
+<p>Geben Sie für jeden Studierenden aus, wieviele Kurse er/sie belegen könnte (also wieviele Kurse es insgesamt gibt).</p>
+<p><span><em>Antwort: <code><br>select s.name, (select count(*) from kurs) from students s;</code></em></span><br></p>
+<p>c) In FROM-Klauseln<br>Beispiel:
+    <code>select avg(erg) from (select rating/100 as erg from ratings) as derived_table;<br></code>Was berechnet diese Abfrage? <br><em><br>Antwort: Die Abfrage berechnet den Durchschnitt aller ratings in Prozent.</em><br>
+</p>
+<p dir="ltr">d)
+    Mit der Bedingung EXISTS (Unterabfrage) kann man die Tupel abfragen,
+    die in der Ergebnismenge der Unterabfrage enthalten sind. Recherchieren
+    Sie zu EXISTS und schreiben Sie eine Abfrage, die ermittelt, welche
+    Studierenden INF1005 absolviert haben.</p>
+<p dir="ltr"><em>Antwort: <code><br>select s.name from students s where exists (select * from ratings r where r.sid=s.matrikelnr and r.kid="INF1005");</code></em><br></p><br>
+<p></p>
+</body>
+</html>

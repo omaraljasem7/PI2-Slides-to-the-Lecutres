@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<head>
+    <title>Skript 2_p2_students_ratings.sql</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+<p dir="ltr" style="text-align: left;"></p><div><div>use pi2;</div><br><div>create table students (</div><div>&nbsp; &nbsp; matrikelnr int primary key, </div><div>&nbsp; &nbsp; name varchar(64)</div><div>);</div><br><div>insert into students values (5551111, "Mueller");</div><div>insert into students values (5552222, "Mayer");</div><div>insert into students values (5553344, "Schmidt");</div><div>insert into students values (5555566, "Schulze");</div><br><div>create table ratings (</div><div>&nbsp; sid int,</div><div>&nbsp; kid varchar(7),</div><div>&nbsp; rating int,</div><div>&nbsp; FOREIGN KEY (sid) REFERENCES students(matrikelnr),</div><div>&nbsp; FOREIGN KEY (kid) REFERENCES kurs(ModulNr)</div><div>);</div><br><div>insert into ratings values (5551111, "II1001", 80);</div><div>insert into ratings values (5551111, "INF1003", 70);</div><div>insert into ratings values (5552222, "INF1003", 60);</div><div>insert into ratings values (5552222, "INF1005", 75);</div><div>insert into ratings values (5553344, "INF1005", 95);</div><div>insert into ratings values (5555566, "TI5005", 80);</div><br><br><br></div><br><p></p>
+</body>
+</html>

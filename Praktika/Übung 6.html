@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <title>Übung 6</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+<p dir="ltr" style="text-align: left;">Stellen Sie sicher, dass Sie die Tabellen "Dozent" und "Kurs" mit dem ersten&nbsp; <a href="https://moodle.thm.de/mod/resource/view.php?id=575864">Skript</a> angelegt und gefüllt haben.<br>Unterhalb dieser Übung finden Sie noch ein zweites Skript, das sie bitte auch einlesen.</p>
+<h5 dir="ltr" style="text-align: left;">1) SELECT</h5>
+<p dir="ltr" style="text-align: left;"><strong>a) <br></strong>Sie wollen die Namen der Studierende, den Namen der von ihnen absolvierten Module und ihre Note ausgeben lassen. Warum führt <code>select name, modulname, rating from students, kurs, ratings; </code> nicht zum richtigen Ergebnis?</p>
+<p dir="ltr" style="text-align: left;">b) Geben Sie die korrekte Abfrage an.</p>
+<p dir="ltr" style="text-align: left;">c) Selektieren Sie alle Kurse, bei denen Mueller mehr als 75 Punkte erreicht hat.</p>
+<p dir="ltr" style="text-align: left;">d) Geben Sie die Anzahl der Studierenden aus.<br></p>
+<p dir="ltr" style="text-align: left;">e) Was ist an folgender Abfrage überflüssig?
+    <br> <code>select s.name, r.rating, k.modulnr from students s, ratings r, kurs k where s.matrikelnr=r.sid and r.kid=k.modulnr;</code>
+    <br>
+</p>
+<p dir="ltr" style="text-align: left;">f) Ermitteln Sie die Namen der Studierenden, die genau zwei Kurse absolviert haben. Benutzen Sie dabei nicht COUNT.<br></p>
+
+<p dir="ltr" style="text-align: left;"><br></p>
+<h5 dir="ltr" style="text-align: left;">2) Unterabfragen</h5>
+<p>Unterabfragen (subqueries) kann man auf verschiedene Arten verwenden:</p>
+<p>a) In Where-Klauseln:<br>Benutzen Sie den Operator IN, um die Namen aller Studierenden zu ermitteln, deren Matrikelnummer in der Tabelle ratings vorkommt.</p>
+<p>b) In Select's:<br>Beispiel:<code> SELECT column1, (SELECT column2 FROM other_table WHERE condition) AS subquery_result</code><code> FROM table_name;</code></p>
+<p>Geben Sie für jeden Studierenden aus, wieviele Kurse er/sie belegen könnte (also wieviele Kurse es insgesamt gibt).</p>
+<p>c) In FROM-Klauseln<br>Beispiel: 
+  <code>select avg(erg) from (select rating/100 as erg from ratings) as derived_table;</code></p>
+<p></p>
+<p dir="ltr" style="text-align: left;">Was berechnet diese Abfrage? Wie kann man sie umformulieren?</p><p dir="ltr" style="text-align: left;">d) Mit der Bedingung EXISTS (Unterabfrage) kann man die Tupel abfragen, die in der Ergebnismenge der Unterabfrage enthalten sind. Recherchieren Sie zu EXISTS und schreiben Sie eine Abfrage, die ermittelt, welche Studierenden INF1005 absolviert haben.<br></p>
+</body>
+</html>

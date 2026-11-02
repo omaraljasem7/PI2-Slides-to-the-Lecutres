@@ -1,0 +1,20 @@
+###
+# POST request to the server to create cookies.
+# This request sends JSON data containing a user's first and last name.
+# The server should respond by setting cookies for 'firstName' and 'lastName' and return the values for 'firstName'
+# and 'lastName' in its response.
+POST http://localhost:8888/cookies
+Content-Type: application/json
+
+{
+  "firstName": "Max",
+  "lastName": "Mustermann"
+}
+
+###
+# GET request to retrieve cookies from the server.
+# This request includes cookies for 'firstName' and 'lastName' that were set by the server in a previous response.
+# The server should recognize these cookies and and return the values for 'firstName' and 'lastName' in its response.
+GET http://localhost:8888/cookies
+Cookie: firstName=Max
+Cookie: lastName=Mustermann

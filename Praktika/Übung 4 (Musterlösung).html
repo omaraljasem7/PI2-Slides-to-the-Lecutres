@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <title>Übung 4 (Musterlösung)</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+<p dir="ltr" style="text-align: left;"></p><div><h4>AdderVerticle.java</h4><pre><br><div><pre>package de.thm.mni.pi2.adder;<br><br>import io.vertx.core.Future;<br>import io.vertx.core.VerticleBase;
+import io.vertx.core.http.HttpMethod;<br>import io.vertx.core.json.JsonObject;<br>import io.vertx.ext.web.Router;<br>import io.vertx.ext.web.RoutingContext;<br>import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.CorsHandler;<br>import io.vertx.ext.web.handler.StaticHandler;<br><br>import java.time.Month;<br>import java.time.format.TextStyle;<br>import java.util.*;<br><br>public class AdderVerticle extends VerticleBase {<br>  int counter = 0;<br><br>  @Override<br>  public Future&lt;?&gt; start() {<br>    int port = 8888;<br><br>    Router router = Router.router(vertx);</pre><pre>    // Allow CORS for all origins
+    router.route().handler(CorsHandler.create()
+      .allowedMethod(HttpMethod.GET)
+      .allowedMethod(HttpMethod.POST)
+      .allowedMethod(HttpMethod.PUT)
+      .allowedMethod(HttpMethod.DELETE)
+      .allowedHeader("Content-Type")
+      .allowedHeader("Authorization"));</pre><pre><br>    router.post("/add")<br>      .handler(BodyHandler.create()).handler(this::add);<br><br>    router.get("/counter").handler(rc -&gt; {<br>       rc.response()<br>         .setStatusCode(200)<br>         .putHeader("content-type", "text/plain")<br>         .end("Anzahl Aufrufe: " + counter);<br>    });<br><br>    router.route("/static/*").handler(<br>      StaticHandler.create("public"));<br><br>    router.get("/monat/:nummer").handler(rc -&gt; {<br>      int nummer = Integer.parseInt(rc.request().getParam("nummer"));<br>      String monat = switch (nummer) {<br>        case 1 -&gt; "Januar";<br>        case 2 -&gt; "Februar";<br>        case 3 -&gt; "März";<br>        case 4 -&gt; "April";<br>        case 5 -&gt; "Mai";<br>        case 6 -&gt; "Juni";<br>        case 7 -&gt; "Juli";<br>        case 8 -&gt; "August";<br>        case 9 -&gt; "September";<br>        case 10 -&gt; "Oktober";<br>        case 11 -&gt; "November";<br>        case 12 -&gt; "Dezember";<br>        default -&gt; "Invalid Month";<br>      };<br><br>      // Alternativ:<br>      // monat = Month.of(nummer).getDisplayName(TextStyle.FULL, Locale.GERMAN);<br>      rc.response().setStatusCode(200).end(monat );<br>    });<br><br>    return vertx<br>      .createHttpServer()<br>      .requestHandler(router)<br>      .listen(port).onSuccess(http -&gt; {<br>        System.out.println("HTTP server started on port 8888");<br>      });<br>  }<br><br>  private void add(RoutingContext rc) {<br>    try {<br>      counter++;<br>      JsonObject jsonBody = rc.body().asJsonObject();<br>      int a = jsonBody.getInteger("a");<br>      int b = jsonBody.getInteger("b");<br>      int c = jsonBody.getInteger("c");<br>      JsonObject ergebnis = new JsonObject().put("result", a + b + c);<br>      rc.response().setStatusCode(200)<br>        .putHeader("content-type", "application/json")<br>        .end(ergebnis.encode());<br>    } catch (Exception e) { rc.response().setStatusCode(400).end("Ungültiges JSON");  }<br>  }<br>}<br><br></pre></div><br></pre></div><br><p></p>
+</body>
+</html>
